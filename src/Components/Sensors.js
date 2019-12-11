@@ -7,14 +7,16 @@ export default class CreateSensor extends Component {
   constructor(props) {
     super(props);
 
+    this.onChangetype = this.onChangetype.bind(this);
+    this.onChangevalue = this.onChangevalue.bind(this);
     this.onChangeuserID = this.onChangeuserID.bind(this);
-    this.onChangelocation = this.onChangelocation.bind(this);
-    this.onChangeDate = this.onChangeDate.bind(this);
+    this.onChangecreationDate = this.onChangecreationDate.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
+      type: '',
+      value: '',
       userID: '',
-      location: '',
       creationDate: new Date(),
       users: []
     }
@@ -36,20 +38,25 @@ export default class CreateSensor extends Component {
 
   }
 
+  onChangetype(e) {
+    this.setState({
+      type: e.target.value
+    })
+  }
+
+  onChangevalue(e) {
+    this.setState({
+      value: e.target.value
+    })
+  }
+
   onChangeuserID(e) {
     this.setState({
       userID: e.target.value
     })
   }
 
-  onChangelocation(e) {
-    this.setState({
-      location: e.target.value
-    })
-  }
-
-
-  onChangeDate(creationDate) {
+  onChangecreationDate(creationDate) {
     this.setState({
       creationDate: creationDate
     })
@@ -58,15 +65,16 @@ export default class CreateSensor extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const sensor = {
+    const exercise = {
+      type: this.state.type,
+      value: this.state.value,
       userID: this.state.userID,
-      location: this.state.location,
       creationDate: this.state.creationDate
     }
 
-    console.log(sensor);
+    console.log(exercise);
 
-    axios.post('http://localhost:5000/sensors/add', sensor)
+    axios.post('http://localhost:5000/sensors/add', exercise)
       .then(res => console.log(res.data));
 
     window.location = '/';
@@ -75,11 +83,11 @@ export default class CreateSensor extends Component {
   render() {
     return (
     <div>
-      <h3>Create New sensor Log</h3>
+      <h3>Create New Exercise Log</h3>
       <form onSubmit={this.onSubmit}>
         <div className="form-group">
-          <label>userID: </label>
-          <select ref="userInput"
+          <label>sensor name: </label>
+          <select
               required
               className="form-control"
               value={this.state.username}
@@ -95,26 +103,35 @@ export default class CreateSensor extends Component {
           </select>
         </div>
         <div className="form-group">
-          <label>location: </label>
+          <label>value: </label>
           <input  type="text"
               required
               className="form-control"
-              value={this.state.location}
-              onChange={this.onChangelocation}
+              value={this.state.value}
+              onChange={this.onChangevalue}
               />
         </div>
         <div className="form-group">
-        <label>creationDate: </label>
-        <div>
-          <DatePicker
-            selected={this.state.creationDate}
-            onChange={this.onChangeDate}
-          />
+          <label>type</label>
+          <input
+              type="text"
+              className="form-control"
+              value={this.state.type}
+              onChange={this.onChangetype}
+              />
         </div>
+        <div className="form-group">
+          <label>creationDate: </label>
+          <div>
+            <DatePicker
+              selected={this.state.creationDate}
+              onChange={this.onChangecreationDate}
+            />
+          </div>
         </div>
 
         <div className="form-group">
-          <input type="submit" value="Create sensor Log" className="btn btn-primary" />
+          <input type="submit" value="Create measure Log" className="btn btn-primary" />
         </div>
       </form>
     </div>

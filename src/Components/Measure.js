@@ -28,7 +28,7 @@ export default class CreateMeasure extends Component {
         if (response.data.length > 0) {
           this.setState({
             sensors: response.data.map(sensor => sensor._id),
-            sensorname: response.data[0]._id
+            sensorID: response.data[0]._id
           })
         }
       })
@@ -90,8 +90,8 @@ export default class CreateMeasure extends Component {
           <select
               required
               className="form-control"
-              value={this.state.sensorname}
-              onChange={this.onChangesensorname}>
+              value={this.state.sensorID}
+              onChange={this.onChangesensorID}>
               {
                 this.state.sensors.map(function(sensor) {
                   return <option
