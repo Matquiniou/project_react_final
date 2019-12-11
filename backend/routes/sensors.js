@@ -38,9 +38,9 @@ router.route('/:id').delete((req, res) => {
 router.route('/update/:id').post((req, res) => {
   Sensors.findById(req.params.id)
     .then(Sensors => {
-      Sensors.userID = req.body.userID; 
+      Sensors.userID = req.body.userID;
       Sensors.location = req.body.location;
-      Sensors.creationDate = Date.parse(req.body.creationDate);
+      Sensors.date = req.body.date;
 
       Sensors.save()
         .then(() => res.json('Sensors updated!'))

@@ -6,7 +6,7 @@ export default class CreateUser extends Component {
     super(props);
 
     this.onChangepersonsInHouse = this.onChangepersonsInHouse.bind(this);
-    this.onChangeLocation = this.onChangeLocation.bind(this);
+    this.onChangelocation = this.onChangelocation.bind(this);
     this.onChangehouseSize = this.onChangehouseSize.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
@@ -22,7 +22,7 @@ export default class CreateUser extends Component {
       personsInHouse: e.target.value
     })
   }
-  onChangeLocation(e) {
+  onChangelocation(e) {
     this.setState({
       location: e.target.value
     })
@@ -71,7 +71,7 @@ export default class CreateUser extends Component {
                 required
                 className="form-control"
                 value={this.state.location}
-                onChange={this.onChangeLocation}
+                onChange={this.onChangelocation}
                 />
           </div>
           <div className="form-group">

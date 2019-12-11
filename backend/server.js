@@ -18,11 +18,11 @@ connection.once('open', () => {
   console.log("MongoDB database connection established successfully");
 })
 
-const sensorRouter = require('./routes/sensor');
+const sensorRouter = require('./routes/sensors');
 const measureRouter = require('./routes/measure');
 const usersRouter = require('./routes/users');
 
-app.use('/sensor', sensorRouter);
+app.use('/sensors', sensorRouter);
 app.use('/measure', measureRouter);
 app.use('/users', usersRouter);
 

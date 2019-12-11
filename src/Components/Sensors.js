@@ -7,9 +7,9 @@ export default class CreateSensor extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeUserID = this.onChangeUserID.bind(this);
-    this.onChangeLocation = this.onChangeLocation.bind(this);
-    this.onChangeCreationdate = this.onChangeCreationdate.bind(this);
+    this.onChangeuserID = this.onChangeuserID.bind(this);
+    this.onChangelocation = this.onChangelocation.bind(this);
+    this.onChangeDate = this.onChangeDate.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
@@ -36,21 +36,22 @@ export default class CreateSensor extends Component {
 
   }
 
-  onChangeUserID(e) {
+  onChangeuserID(e) {
     this.setState({
       userID: e.target.value
     })
   }
 
-  onChangeLocation(e) {
+  onChangelocation(e) {
     this.setState({
       location: e.target.value
     })
   }
 
-  onChangeCreationdate(date) {
+
+  onChangeDate(creationDate) {
     this.setState({
-      creationDate: date
+      creationDate: creationDate
     })
   }
 
@@ -65,7 +66,7 @@ export default class CreateSensor extends Component {
 
     console.log(sensor);
 
-    axios.post('http://localhost:5000/sensor/add', sensor)
+    axios.post('http://localhost:5000/sensors/add', sensor)
       .then(res => console.log(res.data));
 
     window.location = '/';
@@ -74,15 +75,15 @@ export default class CreateSensor extends Component {
   render() {
     return (
     <div>
-      <h3>Create New Exercise Log</h3>
+      <h3>Create New sensor Log</h3>
       <form onSubmit={this.onSubmit}>
         <div className="form-group">
-          <label>User: </label>
+          <label>userID: </label>
           <select ref="userInput"
               required
               className="form-control"
               value={this.state.username}
-              onChange={this.onChangeUserID}>
+              onChange={this.onChangeuserID}>
               {
                 this.state.users.map(function(user) {
                   return <option
@@ -99,21 +100,21 @@ export default class CreateSensor extends Component {
               required
               className="form-control"
               value={this.state.location}
-              onChange={this.onChangeLocation}
+              onChange={this.onChangelocation}
               />
         </div>
         <div className="form-group">
-          <label>Date: </label>
-          <div>
-            <DatePicker
-              selected={this.state.creationDate}
-              onChange={this.onChangeCreationdate}
-            />
-          </div>
+        <label>creationDate: </label>
+        <div>
+          <DatePicker
+            selected={this.state.creationDate}
+            onChange={this.onChangeDate}
+          />
+        </div>
         </div>
 
         <div className="form-group">
-          <input type="submit" value="Create Exercise Log" className="btn btn-primary" />
+          <input type="submit" value="Create sensor Log" className="btn btn-primary" />
         </div>
       </form>
     </div>
